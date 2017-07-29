@@ -12,7 +12,7 @@
 
 Grafico <- function(NombreEstrella,DatosY){
   
-  DatosX <- seq.int(from = 1, to = length(DatosY),by = 1)
+  DatosX <- seq_len(length(DatosY))
   plot(DatosX,DatosY,type = 'p',
        xlab = "Planetas del sistema",
        ylab = "Distancia a la estrella en U.A.", 
