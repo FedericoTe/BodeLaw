@@ -6,17 +6,29 @@
 # 
 #           Eje Y la distancia a la estrella en U.A.
 #
+#   Se han realizado diferentes pruebas segun si los datos de entrada son listas 
+#   o no lo son
+#
 #
 #########################################################################
 
 
 Grafico <- function(NombreEstrella,DatosY){
   
-  DatosX <- seq_len(length(DatosY))
+  if (is.list(DatosY)) {
+    DatosX <- seq_len(lengths(DatosY))
+    LimiteEjeY <- as.numeric(lapply(DatosY, function(x) max(x)))
+  }else{
+    DatosX <- seq_len(length(DatosY))
+    LimiteEjeY <- max(DatosY)
+  }
+  
+  
   plot(DatosX,DatosY,type = 'p',
        xlab = "Planetas del sistema",
-       ylab = "Distancia a la estrella en U.A.", 
-       ylim = c(0,max(DatosY)))
+       ylab = "Distancia a la estrella en U.A." 
+       #,ylim = c(0,LimiteEjeY)
+       )
   
   Subtitulo <- paste("Sistema de la estrella ",NombreEstrella)
   

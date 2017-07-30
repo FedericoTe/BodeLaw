@@ -36,10 +36,25 @@ LeerDatos <- function(NombreFichero,Directorio){
   # Creamos ahora otro data frame con la columna del tipo: Estrella, Distancia de cada planeta
   # El primero que hacemos es el del sol
   
+  # Seleccionamos los datos relevantes que están por columnas:
+  Seleccion <- select(Planetas,StarName,Planet.SemiMajor.Axis)
+  
+  # Filtramos los datos donde no conocemos la distancia de la órbita
+  
+  Seleccion <- filter(Seleccion,(as.numeric(as.character(Planet.SemiMajor.Axis)) != 0))
+  
+  # Ahora agrupamos por nombre de Estrella y trasponemos la columna con los datos de los semiejes
+  
+  Seleccion <- Seleccion %>% 
+    group_by(StarName) %>% 
+    do (Distancias = t(as.numeric(as.character(.$Planet.SemiMajor.Axis))))
+  
+  # Añadimos  el sistema solar
+  SistemaSolar <- c("Sol",c("0.39","0.72","1","1.52","5.2","9.58","19.23","30.1"))
+  
   
   Estrellas <- levels(planetas[,1])
   
-  SistemaSolar <- c("Sol","0.39","0.72","1","1.52","5.2","9.58","19.23","30.1")
   
   SistemasEstelares <- data.frame(matrix(SistemaSolar, nrow=(length(Estrellas)+1),ncol=9),stringsAsFactors = FALSE)
   
