@@ -21,6 +21,10 @@
 #########################################################################
 
 
+# Para usar las funciones group_by del paquete dplyr
+library(dplyr) 
+
+
 LeerDatos <- function(NombreFichero,Directorio){
   
   direccion2 <- "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_mass,st_rad,pl_pnum,pl_name,pl_orbper,pl_orbsmax,pl_orbeccen,pl_ratdor&format=csv"
