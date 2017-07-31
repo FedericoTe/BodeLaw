@@ -15,20 +15,14 @@
 
 Grafico <- function(NombreEstrella,DatosY){
   
-  if (is.list(DatosY)) {
-    DatosX <- seq_len(lengths(DatosY))
-    LimiteEjeY <- as.numeric(lapply(DatosY, function(x) max(x)))
-  }else{
-    DatosX <- seq_len(length(DatosY))
-    LimiteEjeY <- max(DatosY)
-  }
   
+  DatosX <- seq_len(length(DatosY))
+  LimiteEjeY <- max(DatosY)
   
   plot(DatosX,DatosY,type = 'p',
        xlab = "Planetas del sistema",
-       ylab = "Distancia a la estrella en U.A." 
-       #,ylim = c(0,LimiteEjeY)
-       )
+       ylab = "Distancia a la estrella en U.A." ,
+       ylim = c(0,LimiteEjeY))
   
   Subtitulo <- paste("Sistema de la estrella ",NombreEstrella)
   

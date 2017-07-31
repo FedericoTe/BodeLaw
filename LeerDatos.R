@@ -21,7 +21,7 @@
 #########################################################################
 
 
-# Para usar las funciones group_by del paquete dplyr
+# Para usar las funciones select() group_by() del paquete dplyr
 library(dplyr) 
 
 
@@ -37,7 +37,11 @@ LeerDatos <- function(NombreFichero,Directorio){
   # El primero que hacemos es el del sol
   
   # Seleccionamos los datos relevantes que están por columnas:
-  Seleccion <- select(Planetas,StarName,Planet.SemiMajor.Axis)
+  Seleccion <- select(planetas,StarName,Planet.SemiMajor.Axis)
+  
+  #Seleccionamos aquellos sistemas donde tenemos como mínimo cuatro planetas
+  
+  Seleccion <- Seleccion[as.numeric(planetas$NumberOfPlanetsInSystem)>3,]
   
   # Filtramos los datos donde no conocemos la distancia de la órbita
   
@@ -49,16 +53,20 @@ LeerDatos <- function(NombreFichero,Directorio){
     group_by(StarName) %>% 
     do (Distancias = t(as.numeric(as.character(.$Planet.SemiMajor.Axis))))
   
+  # ahora se puede graficar cada valor segun el indice con: 
+  #Grafico(Seleccion[indice,1][[1]],as.numeric(unlist(Seleccion[indice,][[2]])))
+
+  
   # Añadimos  el sistema solar
-  SistemaSolar <- c("Sol",c("0.39","0.72","1","1.52","5.2","9.58","19.23","30.1"))
+  #SistemaSolar <- c("Sol",c("0.39","0.72","1","1.52","5.2","9.58","19.23","30.1"))
+  
+  SistemaSolar <- list(0.39,0.72,1,1.52,5.2,9.58,19.23,30.1)
   
   
-  Estrellas <- levels(planetas[,1])
+  df <- data.frame("Sol",SistemaSolar)
   
-  
-  SistemasEstelares <- data.frame(matrix(SistemaSolar, nrow=(length(Estrellas)+1),ncol=9),stringsAsFactors = FALSE)
-  
-  
+  bind_rows(Seleccion,df)
+
   
 }
 
