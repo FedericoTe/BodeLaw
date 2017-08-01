@@ -21,20 +21,21 @@
 #########################################################################
 
 
-# Para usar las funciones select() group_by() del paquete dplyr
+# Para usar las funciones select(), filter() y group_by() del paquete dplyr
 library(dplyr) 
 
 
 LeerDatos <- function(NombreFichero,Directorio){
   
-  direccion2 <- "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_mass,st_rad,pl_pnum,pl_name,pl_orbper,pl_orbsmax,pl_orbeccen,pl_ratdor&format=csv"
+  if ((is.na(NombreFichero)) || (is.na(Directorio))){
+    direccion <- "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_mass,st_rad,pl_pnum,pl_name,pl_orbper,pl_orbsmax,pl_orbeccen,pl_ratdor&format=csv"
+  }else{
+    direccion <- paste(Directorio,NombreFichero,sep="/")
+  }
   
-  direccion <- paste(Directorio,NombreFichero,sep="/")
   Cabecera <- c("StarName","StarMass","RadiusMass","NumberOfPlanetsInSystem","PlanetName","OrbitalPeriod-Days","Planet-SemiMajor-Axis","Planet-Eccentricity","Ratio-Distance-StellarRadius")
-  planetas <- read.csv(direccion2, sep =',',header = FALSE, col.names = Cabecera, stringsAsFactors = FALSE)
+  planetas <- read.csv(direccion, sep =',',header = FALSE, col.names = Cabecera, stringsAsFactors = FALSE)
   
-  # Creamos ahora otro data frame con la columna del tipo: Estrella, Distancia de cada planeta
-  # El primero que hacemos es el del sol
   
   # Seleccionamos los datos relevantes que están por columnas:
   Seleccion <- select(planetas,StarName,Planet.SemiMajor.Axis)
@@ -65,7 +66,7 @@ LeerDatos <- function(NombreFichero,Directorio){
   
   df <- data.frame("Sol",SistemaSolar)
   
-  bind_rows(Seleccion,df)
+  Seleccion <- bind_rows(Seleccion,df)
 
   
 }
