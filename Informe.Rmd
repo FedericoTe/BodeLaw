@@ -1,0 +1,41 @@
+---
+title: "Application of the Titius–Bode Rule to extra-solar planetary Systems"
+author: "Federico Tejeiro"
+date: "2 de agosto de 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Application of the Titius–Bode Rule to extra-solar planetary Systems
+
+Los datos utilizados han sido extraídos de la **NASA Exoplanets Archive** .
+
+La consulta realizada puedes extraesrla en este  [enlace]<https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_mass,st_rad,pl_pnum,pl_name,pl_orbper,pl_orbsmax,pl_orbeccen,pl_ratdor> .
+
+ontent as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r include= FALSE}
+Datos <- Seleccion("https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_mass,st_rad,pl_pnum,pl_name,pl_orbper,pl_orbsmax,pl_orbeccen,pl_ratdor&format=csv")
+```
+
+
+En total hemos analizado `r length(Datos[[1]]) `  sistemas con planetas, ya que también hemos incluido el Sol.
+
+
+Ahora vamos a probar incluyendo algún gráfico
+
+
+## Including Plots
+
+Por ejemplo el Sistema Solar:
+
+```{r pressure, echo=FALSE}
+
+Grafico(Datos[length(Datos[[1]]),][[1]],as.numeric(unlist(Datos[length(Datos[[1]]),][[2]])))
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

@@ -50,7 +50,7 @@ LeerDatos <- function(NombreFichero,Directorio){
   
   # Ahora ordenamos los datos por StarName y por Planet.SemiMajor.Axis
   
-  Seleccion <- arrange(Seleccion,StarName,Planet.SemiMajor.Axis)
+  Seleccion <- arrange(Seleccion,StarName,Planet.SemiMajor.Axis) # Incluir as.numeric y as.character???
   
   # Ahora agrupamos por nombre de Estrella y trasponemos la columna con los datos de los semiejes
   
@@ -65,11 +65,20 @@ LeerDatos <- function(NombreFichero,Directorio){
   # Añadimos  el sistema solar
   #SistemaSolar <- c("Sol",c("0.39","0.72","1","1.52","5.2","9.58","19.23","30.1"))
   
-  SistemaSolar <- list(0.39,0.72,1,1.52,5.2,9.58,19.23,30.1)
+  SistemaSolar <- c(0.39,0.72,1,1.52,5.2,9.58,19.23,30.1)
+  
+  df <- data.frame("Sol",SistemaSolar,stringsAsFactors = FALSE)
   
   
-  df <- data.frame("Sol",SistemaSolar)
   
+  # Ahora agrupamos los planetas del sol
+  
+  df <- df %>% 
+    group_by(X.Sol.) %>% 
+    do (Distancias = t(as.numeric(as.character( .$SistemaSolar))))
+  
+  # Y por ultimo nombramos a las columnas igual y lo añado al final de la Seleccion
+  colnames(df) <- colnames(Seleccion)
   Seleccion <- bind_rows(Seleccion,df)
 
   # ahora se puede graficar cada valor segun el indice con: 
