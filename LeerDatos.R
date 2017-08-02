@@ -48,6 +48,10 @@ LeerDatos <- function(NombreFichero,Directorio){
   
   Seleccion <- filter(Seleccion,(as.numeric(as.character(Planet.SemiMajor.Axis)) != 0))
   
+  # Ahora ordenamos los datos por StarName y por Planet.SemiMajor.Axis
+  
+  Seleccion <- arrange(Seleccion,StarName,Planet.SemiMajor.Axis)
+  
   # Ahora agrupamos por nombre de Estrella y trasponemos la columna con los datos de los semiejes
   
   Seleccion <- Seleccion %>% 
@@ -68,6 +72,10 @@ LeerDatos <- function(NombreFichero,Directorio){
   
   Seleccion <- bind_rows(Seleccion,df)
 
+  # ahora se puede graficar cada valor segun el indice con: 
+  #Grafico(Seleccion[indice,1][[1]],as.numeric(unlist(Seleccion[indice,][[2]])))
+  
+  return(Seleccion)
   
 }
 
