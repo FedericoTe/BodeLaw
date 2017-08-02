@@ -25,13 +25,11 @@
 library(dplyr) 
 
 
-LeerDatos <- function(NombreFichero,Directorio){
+LeerDatos <- function(Enlace){
   
-  if ((is.na(NombreFichero)) || (is.na(Directorio))){
-    direccion <- "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_mass,st_rad,pl_pnum,pl_name,pl_orbper,pl_orbsmax,pl_orbeccen,pl_ratdor&format=csv"
-  }else{
-    direccion <- paste(Directorio,NombreFichero,sep="/")
-  }
+  
+  direccion <- Enlace
+  
   
   Cabecera <- c("StarName","StarMass","RadiusMass","NumberOfPlanetsInSystem","PlanetName","OrbitalPeriod-Days","Planet-SemiMajor-Axis","Planet-Eccentricity","Ratio-Distance-StellarRadius")
   planetas <- read.csv(direccion, sep =',',header = FALSE, col.names = Cabecera, stringsAsFactors = FALSE)
@@ -40,7 +38,11 @@ LeerDatos <- function(NombreFichero,Directorio){
   # Seleccionamos los datos relevantes que están por columnas:
   Seleccion <- select(planetas,StarName,Planet.SemiMajor.Axis)
   
-  #Seleccionamos aquellos sistemas donde tenemos como mínimo cuatro planetas
+  #########################
+  # En la Seleccion que hacemos abajo hay algun error. Revisarlo posteriormente.
+  ###########################
+  
+  #Seleccionamos aquellos sistemas donde tenemos como mínimo cuatro planetas 
   
   Seleccion <- Seleccion[as.numeric(planetas$NumberOfPlanetsInSystem)>3,]
   
