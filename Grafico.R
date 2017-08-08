@@ -68,14 +68,3 @@ Grafico <- function(NombreEstrella,DatosY){
 ############################################
 
 
-
-###############################################################
-#
-#   Funcion que transforma los datos recibidos de LeerDatos.R en un
-#   formato que pueda entender Grafico.R
-#   Acaba llamando a la funcion Grafico.R
-#
-#
-############################################################
-
-Convertir<- function()

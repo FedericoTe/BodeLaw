@@ -2,7 +2,9 @@
 title: "Application of the Titius–Bode Rule to extra-solar planetary Systems"
 author: "Federico Tejeiro"
 date: "2 de agosto de 2017"
-output: pdf_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -13,12 +15,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Los datos utilizados han sido extraídos de la **NASA Exoplanets Archive** .
 
-La consulta realizada puedes extraesrla en este  [enlace]<https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_mass,st_rad,pl_pnum,pl_name,pl_orbper,pl_orbsmax,pl_orbeccen,pl_ratdor> .
+La consulta realizada puedes extrasrla en este  [enlace]<https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_mass,st_rad,pl_pnum,pl_name,pl_orbper,pl_orbsmax,pl_orbeccen,pl_ratdor> .
+
+Grabo las funciones...
+
+```{r include= FALSE}
+
+source("LeerDatos.R", local = TRUE)
+source("Grafico.R", local = TRUE)
+
+```
+
 
 ontent as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r include= FALSE}
-Datos <- Seleccion("https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_mass,st_rad,pl_pnum,pl_name,pl_orbper,pl_orbsmax,pl_orbeccen,pl_ratdor&format=csv")
+Datos <- LeerDatos("https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_mass,st_rad,pl_pnum,pl_name,pl_orbper,pl_orbsmax,pl_orbeccen,pl_ratdor&format=csv")
 ```
 
 
