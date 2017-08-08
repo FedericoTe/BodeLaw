@@ -91,3 +91,13 @@ LeerDatos <- function(Enlace){
 }
 
 
+#############################################
+#
+#   POR HACER
+#
+#   La seleccion de sistemas con mas de 3 planetas no está bien hecha. Revisarla
+#
+#
+#########################################
+
+
