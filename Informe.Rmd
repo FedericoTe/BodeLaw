@@ -3,7 +3,10 @@ title: "Application of the Titius–Bode Rule to extra-solar planetary Systems"
 author: "Federico Tejeiro"
 date: "2 de agosto de 2017"
 output:
-  pdf_document: default
+  pdf_document: 
+    toc: true
+    toc_depth: 2
+    number_sections: true
   html_document: default
 ---
 
@@ -11,7 +14,15 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Application of the Titius–Bode Rule to extra-solar planetary Systems
+#1.- Introduction
+
+Recientemente se han encontrado varios planetas.... figuras del número de planetas... Y se ha aplicado diferentes versiones de la ley de Titius-Bode para poder predecir la existencia de nuevos planetas:  . Ver la seccion 3 de 1304.3341
+
+#2.- Methods
+
+Se ha usado...
+
+#2.1.- Data
 
 Los datos utilizados han sido extraídos de la **NASA Exoplanets Archive** .
 
@@ -19,17 +30,22 @@ La consulta realizada puedes extrasrla en este  [enlace]<https://exoplanetarchiv
 
 Grabo las funciones...
 
-```{r include= FALSE}
+```{r funciones, include= FALSE}
 
 source("LeerDatos.R", local = TRUE)
 source("Grafico.R", local = TRUE)
 
 ```
 
+#2.2.-Titius-Bode Law
 
-ontent as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Como implemento la ley.... Siguiendo a 1304.3341.pdf podemos expresar esta relacion con dos parámetros libres:  a_n = a cdot C^n  Siendo a_n el semieje mayor del planeta que ocupa el lugar n-simo, n = 1,2,3,... hasta el número de planetas que tenga el sistema solar y los parámetros a encontrar de cada sistema son a y C. Fácilmente: C = a_2 / a_1 y a = (a_1)^2/a_2
 
-```{r include= FALSE}
+#2.3.- Results
+
+output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r datos, include= FALSE}
 Datos <- LeerDatos("https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,st_mass,st_rad,pl_pnum,pl_name,pl_orbper,pl_orbsmax,pl_orbeccen,pl_ratdor&format=csv")
 ```
 
@@ -40,14 +56,34 @@ En total hemos analizado `r length(Datos[[1]]) `  sistemas con planetas, ya que 
 Ahora vamos a probar incluyendo algún gráfico
 
 
+
+
 ## Including Plots
 
 Por ejemplo el Sistema Solar:
 
-```{r pressure, echo=FALSE}
+```{r graficos, echo=FALSE}
 
-Grafico(Datos[length(Datos[[1]]),][[1]],as.numeric(unlist(Datos[length(Datos[[1]]),][[2]])))
+# par(mfrow=c((length(Datos[[1]])%/%4)),4)
+#par(mfrow=c(3,2))
+
+#Grafico(Datos[length(Datos[[1]]),][[1]],as.numeric(unlist(Datos[length(Datos[[1]]),][[2]])))
+#Grafico(Datos[1,][[1]],as.numeric(unlist(Datos[1,][[2]])))
+#Grafico(Datos[2,][[1]],as.numeric(unlist(Datos[2,][[2]])))
+#Grafico(Datos[3,][[1]],as.numeric(unlist(Datos[3,][[2]])))
+#Grafico(Datos[4,][[1]],as.numeric(unlist(Datos[4,][[2]])))
+indice <- 1
+while (indice !=(length(Datos[[1]]))){
+  Grafico(Datos[indice,][[1]], as.numeric(unlist(Datos[indice,][[2]])))
+  indice <- indice +1
+}
+#Grafico(Datos[,][[1]], as.numeric(unlist(Datos[,][[2]])))
 
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+#3.-Consideration of Other Studies
+
+Veremos a ver
+
