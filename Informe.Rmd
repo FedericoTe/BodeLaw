@@ -73,8 +73,8 @@ Por ejemplo el Sistema Solar:
 #Grafico(Datos[3,][[1]],as.numeric(unlist(Datos[3,][[2]])))
 #Grafico(Datos[4,][[1]],as.numeric(unlist(Datos[4,][[2]])))
 indice <- 1
-while (indice !=(length(Datos[[1]]))){
-  Grafico(Datos[indice,][[1]], as.numeric(unlist(Datos[indice,][[2]])))
+while (indice !=(length(Datos$NombreEstrella))){
+  Grafico(Datos$NombreEstrella[indice], Datos$NumeroPlanetas[indice], as.numeric(unlist(Datos$Distancias [indice])))
   indice <- indice +1
 }
 #Grafico(Datos[,][[1]], as.numeric(unlist(Datos[,][[2]])))
