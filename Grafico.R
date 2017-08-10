@@ -4,57 +4,48 @@
 #
 #          Eje X el orden del planeta
 # 
-#           Eje Y la distancia a la estrella en U.A.
+#          Eje Y la distancia a la estrella en U.A.
 #
 #   Llamando a la funcion con
-#   #Grafico(Seleccion[indice,1][[1]],as.numeric(unlist(Seleccion[indice,][[2]])))
-#   Se grafica bien siendo Seleccion el return de la funcion LeerDatos.R
-#
-#  La estructura de Seleccion es: str(Seleccion)
-#  Classes ‘rowwise_df’, ‘tbl_df’, ‘tbl’ and 'data.frame':	66 obs. of  2 variables:
-#     $ StarName  : chr  "55 Cnc" "GJ 3293" "GJ 667 C" "GJ 676 A" ...
-#     $ Distancias:List of 66
-#
-#   Y tail(Seleccion)
-#
-#    # A tibble: 6 x 2
-#     StarName    Distancias
-#     <chr>        <list>
-#  1  Kepler-85 <dbl [1 x 2]>
-#  2    KOI-351 <dbl [1 x 7]>
-#  3     KOI-94 <dbl [1 x 4]>
-#  4 TRAPPIST-1 <dbl [1 x 6]>
-#  5    WASP-47 <dbl [1 x 4]>
-#  6        Sol     <dbl [8]>
-#
-# Y los valores del elemento 66 son:
-#     > Seleccion[66,][[1]]
-#     [1] "Sol"
-#     > Seleccion[66,][[2]]
-#     [[1]]
-#     [1]  0.39  0.72  1.00  1.52  5.20  9.58 19.23 30.10
+#   Grafico(Seleccion$NombreEstrella[indice], Seleccion$NumeroPlanetas[indice], 
+#           as.numeric(unlist(Seleccion$Distancias [indice])))
 #
 #
+#  Como ejemplo, los valores de indice = 66, el sistema solar, son:
+#
+#   > Seleccion[66,]
+#     # A tibble: 1 x 3
+#     NombreEstrella NumeroPlanetas    Distancias
+#             <chr>          <chr>        <list>
+#   1          Sol            8       <dbl [1 x 8]>
+#
+#   > Seleccion$Distancias[66]
+#   [[1]]
+#         [,1] [,2] [,3] [,4] [,5] [,6]  [,7] [,8]
+#   [1,] 0.39 0.72    1 1.52  5.2 9.58 19.23 30.1
 #
 #########################################################################
 
 
-Grafico <- function(NombreEstrella,DatosY){
+Grafico <- function(NombreEstrella,CuantosPlanetas,DatosY){
   
   
   DatosX <- seq_len(length(DatosY))
   LimiteEjeY <- max(DatosY)
   
   plot(DatosX,DatosY,type = 'p',
-       xlab = "Planetas del sistema",
+       xlab = paste (CuantosPlanetas, " planetas en el sistema estelar"),
        ylab = "Distancia a la estrella en U.A." ,
        ylim = c(0,LimiteEjeY))
   
-  Subtitulo <- paste("Sistema de la estrella ",NombreEstrella)
+  # Titulo <- "Ley de Titius-Bode"
+  Titulo <- paste("Sistema estelar", NombreEstrella)
+  #Subtitulo <- paste("Sistema de la estrella ",NombreEstrella)
   
-  title("Ley de Titius-Bode", cex.main = 2,   font.main= 4, col.main= "blue",
-        sub = Subtitulo, cex.sub = 1.25, font.sub = 2, col.sub = "red",
-        outer = FALSE)
+  #title(Titulo, cex.main = 2,   font.main= 4, col.main= "blue",
+        #sub = Subtitulo, cex.sub = 1.25, font.sub = 2, col.sub = "red",
+        #outer = FALSE)
+  title(Titulo, cex.main = 1.5,   font.main= 4, col.main= "blue", outer = FALSE)
   
 }
 
@@ -68,14 +59,3 @@ Grafico <- function(NombreEstrella,DatosY){
 ############################################
 
 
-
-###############################################################
-#
-#   Funcion que transforma los datos recibidos de LeerDatos.R en un
-#   formato que pueda entender Grafico.R
-#   Acaba llamando a la funcion Grafico.R
-#
-#
-############################################################
-
-Convertir<- function()
