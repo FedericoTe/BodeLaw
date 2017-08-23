@@ -22,6 +22,12 @@ Recientemente se han encontrado varios planetas.... figuras del número de plane
 
 Se ha usado...
 
+Todo el programa se encuentra en:
+
+https://github.com/FedericoTe/BodeLaw
+
+
+
 #2.1.- Data
 
 Los datos utilizados han sido extraídos de la **NASA Exoplanets Archive** .
@@ -38,6 +44,9 @@ source("Grafico.R", local = TRUE)
 ```
 
 #2.2.-Titius-Bode Law
+
+
+FALTA HACER LA FUNCION
 
 Como implemento la ley.... Siguiendo a 1304.3341.pdf podemos expresar esta relacion con dos parámetros libres:  a_n = a cdot C^n  Siendo a_n el semieje mayor del planeta que ocupa el lugar n-simo, n = 1,2,3,... hasta el número de planetas que tenga el sistema solar y los parámetros a encontrar de cada sistema son a y C. Fácilmente: C = a_2 / a_1 y a = (a_1)^2/a_2
 
@@ -86,4 +95,8 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 #3.-Consideration of Other Studies
 
 Veremos a ver
+
+#4.- Bibliografía
+
+APRENDER A incluir enlace en Markdown
 
